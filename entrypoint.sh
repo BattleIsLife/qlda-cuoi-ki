@@ -15,6 +15,7 @@ if [ -z "$(ls -A /var/www/html/vendor)" ]; then
     # Migration
     echo "Tiến hành migration"
     php artisan migrate
+    php artisan db:seed
 
 #     service apache2 reload
 fi
