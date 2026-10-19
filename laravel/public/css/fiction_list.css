@@ -1,0 +1,33 @@
+/* Flexbox chứa truyện */
+
+/* Thông tin truyện */
+ .fiction
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.fiction-info
+{
+    display: flex;
+    flex-direction: column;
+}
+
+img.cover_image
+{
+    width: 108px;
+    height: 170px;
+    object-fit: cover;
+}
+
+@media (max-width: 866px) {
+    .fiction{
+        justify-content: center;
+    }
+
+    .fic-title
+    {
+        text-align: center;
+    }
+}
