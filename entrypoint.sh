@@ -16,11 +16,10 @@ if [ -z "$(ls -A /var/www/html/vendor)" ]; then
     echo "Tiến hành migration"
     php artisan migrate
     php artisan db:seed
+    php artisan storage:link
 
-#     service apache2 reload
 fi
 
 chown -R www-data:www-data /var/www/html/storage
-# chmod 755 -R /var/www/html/storage
 
 exec "$@"
