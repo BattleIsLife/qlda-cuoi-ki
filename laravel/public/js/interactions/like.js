@@ -52,6 +52,33 @@ async function like_series(btn) {
     document.getElementById('likeCount').textContent = data.like_count
 }
 
+async function like_author(btn) {
+
+    const author_id = btn.getAttribute('data-bs-id');
+
+    // Fetch API
+    const response = await fetch(`${BASE_URL}/author/${author_id}/like`, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': CSRF_TOKEN,
+            'Accept': 'application/json',
+        },
+    });
+
+    btn.disabled = true;
+    const data = await response.json();
+
+    // Không xử lý nếu như like thất bại
+    if(!data)
+    {
+        return;
+    }
+
+    btn.disabled = false;
+    // Còn lại thì update số lượt like
+    document.getElementById('likeCount').textContent = data.like_count
+}
+
 async function like_fiction_in_series(btn) {
 
     const fiction_id = btn.getAttribute('data-bs-id');
