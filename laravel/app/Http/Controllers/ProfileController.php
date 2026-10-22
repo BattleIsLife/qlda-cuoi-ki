@@ -27,6 +27,23 @@ class ProfileController extends Controller
         return view('user.profile.list_fictions', $data);
     }
 
+    public function favorite_fiction_list()
+    {
+        $fictions = Fiction::whereHas('like_fiction_history', function ($like_history) {
+            $like_history->whereUserId(Auth::guard('web')->user()->id);
+        })
+            ->where('user_id', '!=', Auth::guard('web')->user()->id)
+            ->withCount('like_fiction_history')
+            ->orderByDesc('created_at')
+            ->paginate(10);
+
+        $data = [
+            'fictions' => $fictions,
+        ];
+
+        return view('user.profile.favorite_fictions', $data);
+    }
+
     public function series_list()
     {
         $series = Series::whereUserId(Auth::guard('web')->user()->id)->orderByDesc('created_at')->get();
@@ -36,5 +53,22 @@ class ProfileController extends Controller
         ];
 
         return view('user.profile.list_series', $data);
+    }
+
+    public function favorite_series_list()
+    {
+        $series = Series::whereHas('like_series_history', function ($like_history) {
+            $like_history->whereUserId(Auth::guard('web')->user()->id);
+        })
+            ->where('user_id', '!=', Auth::guard('web')->user()->id)
+            ->withCount('like_series_history')
+            ->orderByDesc('created_at')
+            ->paginate(10);
+
+        $data = [
+            'allSeries' => $series,
+        ];
+
+        return view('user.profile.favorite_series', $data);
     }
 }

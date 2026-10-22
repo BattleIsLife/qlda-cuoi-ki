@@ -10,10 +10,17 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.fiction_list') }}">Danh sách truyện</a>
+                    <a class="nav-link" href="{{ route('user.favorite_fiction') }}">Danh sách truyện yêu thích</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.series_list') }}">Danh sách series</a>
+                    <a class="nav-link" href="{{ route('user.favorite_series') }}">Danh sách series yêu thích</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.fiction_list') }}">Danh sách truyện sáng tác</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.series_list') }}">Danh sách series sáng tác</a>
                 </li>
 
                 <li class="nav-item mt-3">
