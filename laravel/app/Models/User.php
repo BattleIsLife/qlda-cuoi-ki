@@ -70,6 +70,11 @@ class User extends Authenticatable
         return $this->hasMany(LikeChapterHistory::class, 'user_id');
     }
 
+    public function like_author_history()
+    {
+        return $this->hasMany(LikeAuthorHistory::class, 'author_id');
+    }
+
     public function upvote_chapter_comment_history()
     {
         return $this->hasMany(UpvoteChapterCommentHistory::class, 'user_id');
