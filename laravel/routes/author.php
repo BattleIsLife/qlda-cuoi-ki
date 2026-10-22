@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Author\AuthorSeriesController;
 use App\Http\Controllers\Author\AuthorFictionController;
 use App\Http\Controllers\Author\AuthorChapterController;
+use App\Http\Controllers\Author\AuthorProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Route tác giả
@@ -71,4 +72,17 @@ Route::prefix('author')->middleware('check.user.login')->group(function(){
     // Xóa tài khoản
     Route::get('delete_account', [AuthController::class, 'delete_account'])->name('user.delete_account');
     Route::delete('delete_account', [AuthController::class, 'delete_account_attempt']);
+});
+
+// Profile của người dùng khác
+Route::prefix('view_author')->group(function(){
+    // Trang thông tin người dùng
+    Route::get('/{author_id}', [AuthorProfileController::class, 'index'])->name('other_user.profile');
+    Route::get('/profile/{author_id}', [AuthorProfileController::class, 'index']);
+
+    // Danh sách truyện
+    Route::get('/fiction_list/{author_id}', [AuthorProfileController::class, 'fiction_list'])->name('other_user.fiction_list');
+
+    // Danh sách series
+    Route::get('/series_list/{author_id}', [AuthorProfileController::class, 'series_list'])->name('other_user.series_list');
 });

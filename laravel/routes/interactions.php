@@ -9,6 +9,7 @@ Route::controller(InteractionController::class)->middleware('check.user.login')-
     Route::post('/fiction/{fictionId}/like', 'toggleFictionLike')->name('fiction.like');
     Route::post('/chapter/{chapterId}/like', 'toggleChapterLike')->name('chapter.like');
     Route::post('/series/{seriesId}/like', 'toggleSeriesLike')->name('series.like');
+    Route::post('/author/{seriesId}/like', 'toggleAuthorLike')->name('author.like');
     Route::post('/chapter_comments/{commentId}/vote', 'voteChapterComment')->name('chapter_comments.vote');
     Route::post('/moderator_post_comments/{commentId}/vote', 'voteModeratorPostComment')->name('moderator_post_comments.vote');
 });
