@@ -6,7 +6,14 @@ use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__.'/../routes/web.php',
+        web: [
+            __DIR__.'/../routes/web.php',
+            __DIR__.'/../routes/auth.php',
+            __DIR__.'/../routes/author.php',
+            __DIR__.'/../routes/moderator.php',
+            __DIR__.'/../routes/contents.php',
+            __DIR__.'/../routes/interactions.php',
+        ],
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
