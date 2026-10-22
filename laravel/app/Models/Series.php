@@ -33,4 +33,9 @@ class Series extends Model
         // Tham số: (Model_Đích, Model_Trung_Gian, Khóa_Ngoại_Trung_Gian, Khóa_Ngoại_Đích)
         return $this->hasManyThrough(Chapter::class, Fiction::class, 'series_id', 'fiction_id');
     }
+
+    public function like_series_history()
+    {
+        return $this->hasMany(LikeSeriesHistory::class, 'series_id');
+    }
 }
