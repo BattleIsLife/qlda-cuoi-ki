@@ -24,6 +24,7 @@
                 </a>
                 <h5 class="text-center"><a href="{{ route('series.detail', $series->id) }}" class="fiction_series_link text-truncate d-block" title="{{ $series->series_name }}">{{ $series->series_name }}</a></h5>
                 <p class="mb-1">Tác giả: <strong>{{ $series->author->username ?? 'Không rõ' }}</strong></p>
+                <p class="mb-1">Lượt thích: {{ $series->like_series_history_count }}</p>
             </div>
 
             <div class="d-flex justify-content-center mt-4">

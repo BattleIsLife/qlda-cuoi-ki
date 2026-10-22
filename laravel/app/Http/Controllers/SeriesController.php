@@ -15,7 +15,7 @@ class SeriesController extends Controller // khai báo series comtroller kế th
         $keyword = trim((string) $request->query('q', '')); //lấy từ khóa tìm kiếm trên URL
 
         // Chỉ hiển thị các series mà có ít nhất 1 truyện đăng chương
-        $allSeries = Series::with('author') // tải cả thông tin series và tác giả 
+        $allSeries = Series::with('author')->withCount('like_series_history') // tải cả thông tin series và tác giả 
             ->whereHas('fictions', function ($fiction) {
                 $fiction->whereHas('chapters', function ($chapter) {
                     $chapter->where('is_posted', '=', 1);
@@ -36,7 +36,7 @@ class SeriesController extends Controller // khai báo series comtroller kế th
 
     public function show(string $seriesId) // nhận tham số seriesId từ URL để hiển thị chi tiết series và các truyện thuộc series đó
     {
-        $series = Series::whereHas('fictions') // series phải có ít nhất 1 truyện mới được hiển thị
+        $series = Series::whereHas('fictions')->withCount('like_series_history') // series phải có ít nhất 1 truyện mới được hiển thị
             ->findOrFail($seriesId); // tìm series theo id, nếu không tìm thấy sẽ trả về lỗi 404
 
             // lấy các truyện thuộc series đó mà có ít nhất 1 chương đã đăng, đếm số lượt thích của mỗi truyện, sắp xếp theo thời gian đăng mới nhất và phân trang
