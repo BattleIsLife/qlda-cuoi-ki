@@ -7,6 +7,7 @@ use App\Models\ChapterComment;
 use App\Models\Fiction;
 use App\Models\Series;
 use App\Models\ModeratorPostComment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -48,15 +49,42 @@ class InteractionController extends Controller
             return $blockedResponse;
         }
 
-        //Kiểm tra truyện có tồn tại không. Không có thì báo lỗi 404.
+        //Kiểm tra series có tồn tại không. Không có thì báo lỗi 404.
         Series::where('id', $seriesId)->firstOrFail();
 
         //Nếu chưa Like thì thêm Like, nếu đã Like thì bỏ Like.
         $liked = $this->toggleLike('like_series_history', 'series_id', $seriesId, $user->id);
 
-        //Đếm tổng số lượt Like của truyện.
+        //Đếm tổng số lượt Like của series.
         $likeCount = DB::table('like_series_history')
             ->where('series_id', $seriesId)
+            ->count();
+
+        return response()->json([
+            'success' => true,
+            'liked' => $liked,
+            'like_count' => $likeCount,
+        ]);
+    }
+
+    public function toggleAuthorLike(Request $request, string $authorId)
+    {
+        $user = $request->user(); //lấy người dùng hiện tại
+
+        //Kiểm tra tài khoản có bị khóa không. Nếu bị khóa thì dừng lại.
+        if ($blockedResponse = $this->blockedResponse($user)) {
+            return $blockedResponse;
+        }
+
+        //Kiểm tra tác giả có tồn tại không. Không có thì báo lỗi 404.
+        User::where('id', $authorId)->firstOrFail();
+
+        //Nếu chưa Like thì thêm Like, nếu đã Like thì bỏ Like.
+        $liked = $this->toggleLike('like_author_history', 'author_id', $authorId, $user->id);
+
+        //Đếm tổng số lượt Like của tác giả.
+        $likeCount = DB::table('like_author_history')
+            ->where('author_id', $authorId)
             ->count();
 
         return response()->json([
