@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Chapter;
 use App\Models\ChapterComment;
 use App\Models\Fiction;
+use App\Models\Series;
 use App\Models\ModeratorPostComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,33 @@ class InteractionController extends Controller
         //Đếm tổng số lượt Like của truyện.
         $likeCount = DB::table('like_fiction_history')
             ->where('fiction_id', $fictionId)
+            ->count();
+
+        return response()->json([
+            'success' => true,
+            'liked' => $liked,
+            'like_count' => $likeCount,
+        ]);
+    }
+
+    public function toggleSeriesLike(Request $request, string $seriesId)
+    {
+        $user = $request->user(); //lấy người dùng hiện tại
+
+        //Kiểm tra tài khoản có bị khóa không. Nếu bị khóa thì dừng lại.
+        if ($blockedResponse = $this->blockedResponse($user)) {
+            return $blockedResponse;
+        }
+
+        //Kiểm tra truyện có tồn tại không. Không có thì báo lỗi 404.
+        Series::where('id', $seriesId)->firstOrFail();
+
+        //Nếu chưa Like thì thêm Like, nếu đã Like thì bỏ Like.
+        $liked = $this->toggleLike('like_series_history', 'series_id', $seriesId, $user->id);
+
+        //Đếm tổng số lượt Like của truyện.
+        $likeCount = DB::table('like_series_history')
+            ->where('series_id', $seriesId)
             ->count();
 
         return response()->json([
