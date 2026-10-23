@@ -34,7 +34,7 @@
                         <h1 class="text-center">Thông tin series</h1>
 
                         <h4 class="text-center mt-3 mb-3">{{ $series->series_name }}</h4>
-                        <p>Tác giả: <strong>{{ $series->author->username ?? 'Không rõ' }}</strong></p>
+                        <p>Tác giả: <strong><a href="{{ route('other_user.profile', $series->author->id) }}">{{ $series->author->username ?? 'Không rõ' }}</a></strong></p>
                         <p>Lượt thích: <span id="likeCount">{{ $series->like_series_history_count }}</span></p>
                          @if ($user)
                             <div>

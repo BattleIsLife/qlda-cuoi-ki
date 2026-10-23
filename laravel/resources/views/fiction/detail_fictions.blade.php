@@ -33,7 +33,7 @@
                         <h1 class="text-center">Thông tin truyện</h1>
 
                         <h4 class="text-center mt-3 mb-3">{{ $fiction->fiction_name }}</h4>
-                        <p>Tác giả: <strong>{{ $fiction->author->username ?? 'Không rõ' }}</strong></p>
+                        <p>Tác giả: <strong><a href="{{ route('other_user.profile', $fiction->author->id) }}">{{ $fiction->author->username ?? 'Không rõ' }}</a></strong></p>
                         <p>Series: <strong>{{ $fiction->series->series_name ?? 'Không có' }}</strong></p>
                         <p>Lượt thích: <span id="likeCount">{{ $fiction->like_fiction_history_count }}</span></p>
 
