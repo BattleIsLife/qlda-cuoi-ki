@@ -10,6 +10,15 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.fiction_list') }}">Danh sách truyện sáng tác</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.series_list') }}">Danh sách series sáng tác</a>
+                </li>
+
+                <hr>
+
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.favorite_fiction') }}">Danh sách truyện yêu thích</a>
                 </li>
                 <li class="nav-item">
@@ -17,10 +26,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.fiction_list') }}">Danh sách truyện sáng tác</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.series_list') }}">Danh sách series sáng tác</a>
+                    <a class="nav-link" href="{{ route('user.favorite_author') }}">Danh sách tác giả yêu thích</a>
                 </li>
 
                 <li class="nav-item mt-3">
