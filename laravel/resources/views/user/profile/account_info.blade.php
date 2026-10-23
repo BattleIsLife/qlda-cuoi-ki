@@ -25,7 +25,13 @@
     <div class="col-sm-6">
         <p>Email: <i>{{ auth()->guard('web')->user()->email }}</i></p>
     </div>
-    <p><a href="{{ @route('user.change_info') }}">Thay đổi thông tin</a></p>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <p>Ngày tham gia: <i>{{ auth()->guard('web')->user()->created_at }}</i></p>
+    </div>
+    <p><a class="btn btn-success" href="{{ @route('user.change_info') }}">Thay đổi thông tin</a></p>
 </div>
 
 @endsection

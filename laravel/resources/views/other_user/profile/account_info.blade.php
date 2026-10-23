@@ -18,6 +18,9 @@
 
 <div class="row">
     <div class="col-sm-6">
+        <p>Ngày tham gia: <i>{{ $author->created_at }}</i></p>
+    </div>
+    <div class="col-sm-6">
         <p>Số lượt thích: <i id="likeCount">{{ $author->like_author_history_count }}</i></p>
     </div>
 </div>
