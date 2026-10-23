@@ -14,6 +14,8 @@ Route::prefix('author')->middleware('check.user.login')->group(function(){
     Route::get('/', [ProfileController::class, 'index'])->name('user.profile');
     Route::get('/profile', [ProfileController::class, 'index']);
 
+    // Tác giả yêu thích
+    Route::get('/favorite_author', [ProfileController::class, 'favorite_author_list'])->name('user.favorite_author');
 
     // Truyện
     Route::get('/fiction_list', [AuthorFictionController::class, 'index'])->name('user.fiction_list');
