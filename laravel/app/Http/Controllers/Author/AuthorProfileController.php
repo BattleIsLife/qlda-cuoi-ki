@@ -13,9 +13,10 @@ class AuthorProfileController extends Controller
     private function no_view_yourself(string $author_id)
     {
         $user = auth('web')->user();
+        $author = User::findOrFail($author_id);
         if(!$user)
             return true;
-        if($user->id === $this->author($author_id))
+        if($user->id === $author->id)
             return false;
         return true;
     }
