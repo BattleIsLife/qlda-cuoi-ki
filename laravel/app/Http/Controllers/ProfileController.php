@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Series;
 use App\Models\Fiction;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -70,5 +71,22 @@ class ProfileController extends Controller
         ];
 
         return view('user.profile.favorite_series', $data);
+    }
+
+    public function favorite_author_list()
+    {
+        
+        $authors = User::whereHas('like_author_history', function ($like_history) {
+            $like_history->whereUserId(Auth::guard('web')->user()->id);
+        })
+            ->withCount('like_author_history')
+            ->orderByDesc('created_at')
+            ->paginate(10);
+
+        $data = [
+            'authors' => $authors,
+        ];
+
+        return view('user.profile.favorite_author', $data);
     }
 }
