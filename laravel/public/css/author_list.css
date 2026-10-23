@@ -1,0 +1,26 @@
+/* Flexbox chứa truyện */
+
+/* Thông tin truyện */
+ .author
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.author-info
+{
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 866px) {
+    .author{
+        justify-content: center;
+    }
+
+    .author-title
+    {
+        text-align: center;
+    }
+}
