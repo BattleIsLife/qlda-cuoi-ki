@@ -13,7 +13,7 @@ if [ -z "$(ls -A /var/www/html/vendor)" ]; then
     # echo "Tiến hành migration"
     # php artisan migrate --force
     # php artisan db:seed
-    # php artisan storage:link
+    php artisan storage:link
 
 fi
 
