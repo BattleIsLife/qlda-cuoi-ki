@@ -5,16 +5,13 @@ if [ -z "$(ls -A /var/www/html/vendor)" ]; then
     echo "Tiến hành cài đặt dependencies"
     composer install --no-interaction --optimize-autoloader
 
-    echo "Creating .env file..."
-    cp /var/www/html/.env.example /var/www/html/.env
-
     # Tạo app key
     echo "Generating app key..."
     php artisan key:generate
 
     # Migration
     echo "Tiến hành migration"
-    php artisan migrate
+    php artisan migrate --force
     php artisan db:seed
     php artisan storage:link
 
