@@ -19,6 +19,8 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 
 WORKDIR /var/www/html
 
+COPY laravel . 
+
 # Copy Composer từ image chính thức (nếu cần composer trong runtime)
 COPY --from=docker.io/library/composer:latest /usr/bin/composer /usr/bin/composer
 
