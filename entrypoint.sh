@@ -5,15 +5,15 @@ if [ -z "$(ls -A /var/www/html/vendor)" ]; then
     echo "Tiến hành cài đặt dependencies"
     composer install --no-interaction --optimize-autoloader
 
-    # Tạo app key
-    echo "Generating app key..."
-    php artisan key:generate
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
 
     # Migration
-    echo "Tiến hành migration"
-    php artisan migrate --force
-    php artisan db:seed
-    php artisan storage:link
+    # echo "Tiến hành migration"
+    # php artisan migrate --force
+    # php artisan db:seed
+    # php artisan storage:link
 
 fi
 
