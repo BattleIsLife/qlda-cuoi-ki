@@ -73,7 +73,7 @@ class AuthorFictionController extends Controller
         $validated = $this->validateFiction($request);
 
         if ($request->hasFile('image')) {
-            if ($fiction->image_link !== "default.jpeg") {
+            if ($fiction->image_link && $fiction->image_link !== "default.jpeg") {
                 Storage::disk('public')->delete($fiction->image_link);
             }
 
