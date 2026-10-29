@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chapter;
 use Illuminate\Http\Request;
 use App\Models\Series;
 use App\Models\Fiction;
@@ -88,5 +89,20 @@ class ProfileController extends Controller
         ];
 
         return view('user.profile.favorite_author', $data);
+    }
+
+    public function bookmarked_chapter_list()
+    {
+        $chapters = Chapter::whereHas('like_chapter_history', function ($like_history) {
+            $like_history->whereUserId(Auth::guard('web')->user()->id);
+        })
+            ->orderByDesc('created_at')
+            ->paginate(10);
+
+        $data = [
+            'chapters' => $chapters,
+        ];
+
+        return view('user.profile.bookmarked_chapter', $data);
     }
 }
