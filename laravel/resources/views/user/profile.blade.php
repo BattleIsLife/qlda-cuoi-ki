@@ -21,6 +21,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.favorite_fiction') }}">Danh sách truyện yêu thích</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.favorite_series') }}">Danh sách series yêu thích</a>
                 </li>
@@ -28,6 +29,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.favorite_author') }}">Danh sách tác giả yêu thích</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.bookmarked_chapter') }}">Danh sách bookmark chương truyện</a>
+                </li>
+
+                <hr>
 
                 <li class="nav-item mt-3">
                     <a class="nav-link bg-secondary text-white" href="{{ route('user.delete_account') }}">Xóa tài khoản</a>

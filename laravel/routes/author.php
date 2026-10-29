@@ -42,6 +42,9 @@ Route::prefix('author')->middleware('check.user.login')->group(function(){
     // Preview chương truyện
     Route::get('/chapter_preview/{chapterId}', [AuthorChapterController::class, 'preview'])->name('chapter.preview');
 
+    // Bookmark
+    Route::get('/bookmarked_chapter', [ProfileController::class, 'bookmarked_chapter_list'])->name('user.bookmarked_chapter');
+
 
     // Series
     // Danh sách series
